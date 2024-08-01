@@ -64,7 +64,9 @@ public class GameManager : MonoBehaviour
         _currentChallengeIndex++;
         if (_currentChallengeIndex >= _maxChallengesPerLevel || _currentChallengeIndex >= _currentLevelChallenges.Count)
         {
-            BeginLevel(_currentLevel + 1);
+            _currentLevel++;
+            BeginLevel(_currentLevel);
+            return;
         }
         StartCoroutine(BeginChallengeCo(_currentLevelChallenges[_currentChallengeIndex]));
     }
@@ -72,6 +74,7 @@ public class GameManager : MonoBehaviour
     private IEnumerator BeginChallengeCo(Challenge c)
     {
         if (_currentChallengeObj != null) Destroy(_currentChallengeObj);
+        _cameraHPivot.position = _cameraBeginPoint.position;
         _currentChallenge = c;
         GameCanvas.Instance.NewChallenge();
         yield return new WaitForSeconds(2f);
@@ -79,5 +82,11 @@ public class GameManager : MonoBehaviour
 
     }
 
+    public void AddPoint()
+    {
+        _points++;
+        GameCanvas.Instance.SetPointsText(_points);
+        BeginNextChallenge();
+    }
 
 }

@@ -192,7 +192,33 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 1bad144be2295a843a110309bff35d68, type: 3}
   - {fileID: 8300000, guid: c93fe460d2c36144e91ccec7b8e07b3f, type: 3}
   - {fileID: 8300000, guid: 34bd4ef35009c2b419da1b0afae44e24, type: 3}
+  _semana:
+  - {fileID: 8300000, guid: 6956e5753557bed4987ba3661273a688, type: 3}
+  - {fileID: 8300000, guid: cce655f05459aea4b8781a392e9f7e9c, type: 3}
+  - {fileID: 8300000, guid: 62ad8334da09ef44d8f5d7909c2e9bd6, type: 3}
+  - {fileID: 8300000, guid: ecf5e9c24b6e11242994417e1d900a2e, type: 3}
+  - {fileID: 8300000, guid: 3f0ab9e808f27fe4c9e6abb0b9761d06, type: 3}
+  - {fileID: 8300000, guid: 6dc8ef4ce26f84746861b96e2723ef7b, type: 3}
+  - {fileID: 8300000, guid: 61852d1593566404d98bebf8697e3172, type: 3}
+  _meses:
+  - {fileID: 8300000, guid: bb4001ef869790b4e9ba0f16613972b1, type: 3}
+  - {fileID: 8300000, guid: f37aa0180fa3d4240ad10b038a10d904, type: 3}
+  - {fileID: 8300000, guid: f1e5ce8ef40fd2247ba29e8be1386d50, type: 3}
+  - {fileID: 8300000, guid: acde8bb1b0ad47b4da87a1ad3d7a77b2, type: 3}
+  - {fileID: 8300000, guid: 9a74006d2614d584aa26c9489be8ba65, type: 3}
+  - {fileID: 8300000, guid: a8d5aa350c27e0241bb2d376498293e5, type: 3}
+  - {fileID: 8300000, guid: 119ccd50c01cd394abbf40fec9c519c9, type: 3}
+  - {fileID: 8300000, guid: d25d38e9797040d46bad4449329a2a2a, type: 3}
+  - {fileID: 8300000, guid: cd871d2a923d41c4e8b24a93c583d5b8, type: 3}
+  - {fileID: 8300000, guid: 732c0d5d14929b342b4d4b39bc1fcfff, type: 3}
+  - {fileID: 8300000, guid: fcf82a43be1767b498b0feb03cbc866c, type: 3}
+  - {fileID: 8300000, guid: 13a8efe37c621a24caa0830a0fea0182, type: 3}
   _cento: {fileID: 8300000, guid: 0ade56068f9183146b0554cb90adbce6, type: 3}
   _mil: {fileID: 8300000, guid: 351ce7a3ff4e9b940847d674a05a9bf8, type: 3}
-  _readTest: 0
   _minWaitTime: 0.5
+  OnReadingFinished:
+    m_PersistentCalls:
+      m_Calls: []
+  OnReadingBegin:
+    m_PersistentCalls:
+      m_Calls: []

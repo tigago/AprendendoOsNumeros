@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d07060436d6cc7459b557296c560515, type: 3}
   m_Name: OrdenarNumerosCrescente
   m_EditorClassIdentifier: 
-  ChallengeName: 
+  ChallengeName: "N\xFAmeros de traz pra frente!"
   TimePerLevel:
-  - -1
-  ChallengePrefab: {fileID: 0}
+  - 10
+  StartFromGameLevel: 0
+  ChallengePrefab: {fileID: 9068677531437320181, guid: 4d74cedfebd47d9418ddb01520791bb9,
+    type: 3}

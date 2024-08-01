@@ -1,18 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(AudioSource))]
-public class NumberReader : MonoBehaviour
+public class Reader : MonoBehaviour
 {
-    public static NumberReader Instance;
+    public static Reader Instance;
     [SerializeField] private AudioSource _audioSource;
-    [SerializeField] private AudioClip[] _numeros0a19, _dezenas, _centenas, _e;
+    [SerializeField] private AudioClip[] _numeros0a19, _dezenas, _centenas, _e, _semana, _meses;
     [SerializeField] private AudioClip _cento, _mil;
-
-    [SerializeField] int _readTest;
     [SerializeField] private float _minWaitTime = 0.5f;
 
+    public UnityEvent OnReadingFinished, OnReadingBegin;
 #if UNITY_EDITOR
     private void OnValidate()
     {
@@ -30,16 +30,52 @@ public class NumberReader : MonoBehaviour
         Instance = this;
     }
 
-
-    [ContextMenu("teste")]
-    public void Teste()
+    public void ReadMonth(int i)
     {
-        ReadNumber(_readTest);
+        if (i < 1 || i > _meses.Length) return;
+        OnReadingBegin?.Invoke();
+        PlayAudioAndWait(_meses[i-1], true, true);
     }
 
+    public void ReadAllMonths()
+    {
+        OnReadingBegin?.Invoke();
+        StartCoroutine(ReadAllMonthsCo());
+    }
+
+    private IEnumerator ReadAllMonthsCo()
+    {
+        for (int i = 0; i < 12; i++)
+        {
+            yield return StartCoroutine(PlayAudioAndWait(_meses[i]));
+        }
+        OnReadingFinished?.Invoke();
+    }
+
+    public void ReadAllDaysOfTheWeek()
+    {
+        OnReadingBegin?.Invoke();
+        StartCoroutine(ReadAllDaysOfTheWeekCo());
+    }
+
+    private IEnumerator ReadAllDaysOfTheWeekCo()
+    {
+        for (int i = 0; i < 7; i++)
+        {
+            yield return StartCoroutine(PlayAudioAndWait(_semana[i]));
+        }
+        OnReadingFinished?.Invoke();
+    }
+    public void ReadDayOfWeek(int i)
+    {
+        if (i < 0 || i >= _semana.Length) return;
+        OnReadingBegin?.Invoke();
+        PlayAudioAndWait(_semana[i], true, true);
+    }
     public void ReadNumber(int n)
     {
         if (n > 9999) return;
+        OnReadingBegin?.Invoke();
         StartCoroutine(ReadNumberCo(n));
     }
 
@@ -47,7 +83,7 @@ public class NumberReader : MonoBehaviour
     {
         if (n > 9999)
         {
-            MainMenu.Instance.OnReadFinished();
+            OnReadingFinished?.Invoke();
             yield break;
         }
         int restante = 0;
@@ -82,18 +118,19 @@ public class NumberReader : MonoBehaviour
 
         if (restante <= 0)
         {
-            MainMenu.Instance.OnReadFinished();
+            OnReadingFinished?.Invoke();
             yield break;
         }
         StartCoroutine(ReadNumberCo(restante));
     }
 
-    private IEnumerator PlayAudioAndWait(AudioClip a, bool ignoreMinTime = false)
+    private IEnumerator PlayAudioAndWait(AudioClip a, bool ignoreMinTime = false, bool callback = false)
     {
         _audioSource.PlayOneShot(a);
         float wait = a.length;
         if (!ignoreMinTime && wait < _minWaitTime) wait = _minWaitTime;
         yield return new WaitForSeconds(wait);
+        if (callback) OnReadingFinished?.Invoke();
     }
 
     private AudioClip RandomE()
